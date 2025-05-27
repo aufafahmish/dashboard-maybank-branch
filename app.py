@@ -174,11 +174,19 @@ def plot_char_count_distribution_st(df, title, color='mediumpurple'):
     plt.tight_layout()
     return fig
 
-def generate_wordcloud_st(text_series, title, colormap='viridis'):
+def generate_wordcloud_st(text_series, title, sentiment_type=None):
     text = ' '.join(text_series.dropna().astype(str))
     if not text.strip():
         return None
-        
+
+    # Map sentiment type ke colormap yang soft
+    colormap_dict = {
+        "Positif": "Greens",
+        "Netral": "Greys",
+        "Negatif": "Reds"
+    }
+    colormap = colormap_dict.get(sentiment_type, "viridis")
+
     wc = WordCloud(
         width=800, 
         height=400, 
@@ -186,7 +194,7 @@ def generate_wordcloud_st(text_series, title, colormap='viridis'):
         colormap=colormap,
         max_words=100
     ).generate(text)
-    
+
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.imshow(wc, interpolation='bilinear')
     ax.axis('off')
@@ -497,7 +505,7 @@ def analyze_sentiment_data(df, sentiment_name, color):
     
     with tab2:
         st.subheader("☁️ Word Cloud")
-        fig_wc = generate_wordcloud_st(df['komentar_clean'], f'Word Cloud - {sentiment_name}')
+        fig_wc = generate_wordcloud_st(df['komentar_clean'], f'Word Cloud - {sentiment_name}', sentiment_type=sentiment_name)
         if fig_wc:
             st.pyplot(fig_wc)
         else:
