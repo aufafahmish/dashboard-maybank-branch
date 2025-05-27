@@ -14,30 +14,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# # Custom CSS
-# st.markdown("""
-# <style>
-#     .main-header {
-#         background: linear-gradient(90deg, #1f4e79 0%, #2e6da4 100%);
-#         padding: 1rem;
-#         border-radius: 10px;
-#         color: white;
-#         text-align: center;
-#         margin-bottom: 2rem;
-#     }
-#     .metric-card {
-#         background: white;
-#         padding: 1rem;
-#         border-radius: 10px;
-#         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-#         border-left: 4px solid #2e6da4;
-#     }
-#     .stExpander {
-#         border: 1px solid #e0e0e0;
-#         border-radius: 5px;
-#     }
-# </style>
-# """, unsafe_allow_html=True)
 # Custom CSS - Gaya Visual Maybank
 # Custom CSS - Tema Cerah ala Maybank
 st.markdown("""
