@@ -402,7 +402,7 @@ def main():
         
         with col2:
             # Summary statistics
-            st.subheader("📈 Statistik Ringkasan")
+            st.subheader("Statistik Ringkasan")
             
             stats_data = {
                 'Sentimen': ['Positif', 'Netral', 'Negatif'],
@@ -415,7 +415,7 @@ def main():
             st.dataframe(pd.DataFrame(stats_data), use_container_width=True)
             
             # Key insights
-            st.subheader("💡 Insight Utama")
+            st.subheader("Insight Utama")
             dominant_sentiment = max([('Positif', total_positif), ('Netral', total_netral), ('Negatif', total_negatif)], 
                                    key=lambda x: x[1])
             
@@ -423,9 +423,9 @@ def main():
             st.write(f"• Rasio positif vs negatif: **{total_positif/total_negatif:.2f}:1**")
             
             if total_positif > total_negatif:
-                st.success("✅ Sentimen pelanggan cenderung positif")
+                st.success("Sentimen pelanggan cenderung positif")
             else:
-                st.warning("⚠️ Perlu perhatian pada sentimen negatif")
+                st.warning("Perlu perhatian pada sentimen negatif")
     
     elif analysis_type == "Sentimen Positif":
         st.header("Analisis Komentar Positif")
@@ -442,33 +442,33 @@ def main():
     elif analysis_type == "Analisis Topik":
         st.header("Analisis Pemodelan Topik")
         
-        topic_tab1, topic_tab2, topic_tab3 = st.tabs(["📈 Topik Positif", "📊 Topik Netral", "📉 Topik Negatif"])
+        topic_tab1, topic_tab2, topic_tab3 = st.tabs(["Topik Positif", "Topik Netral", "Topik Negatif"])
         
         with topic_tab1:
-            st.subheader("📈 Analisis Topik Positif")
+            st.subheader("Analisis Topik Positif")
             fig = plot_topic_analysis_st(data['topik_positif'], "Topik Positif", "#2ecc71")
             if fig:
                 st.pyplot(fig)
                 
-                st.subheader("💬 Contoh Komentar per Topik")
+                st.subheader("Contoh Komentar per Topik")
                 show_topic_examples(data['topik_positif'], "Positif")
         
         with topic_tab2:
-            st.subheader("📊 Analisis Topik Netral")
+            st.subheader("Analisis Topik Netral")
             fig = plot_topic_analysis_st(data['topik_netral'], "Topik Netral", "#f39c12")
             if fig:
                 st.pyplot(fig)
                 
-                st.subheader("💬 Contoh Komentar per Topik")
+                st.subheader("Contoh Komentar per Topik")
                 show_topic_examples(data['topik_netral'], "Netral")
         
         with topic_tab3:
-            st.subheader("📉 Analisis Topik Negatif")
+            st.subheader("Analisis Topik Negatif")
             fig = plot_topic_analysis_st(data['topik_negatif'], "Topik Negatif", "#e74c3c")
             if fig:
                 st.pyplot(fig)
                 
-                st.subheader("💬 Contoh Komentar per Topik")
+                st.subheader("Contoh Komentar per Topik")
                 show_topic_examples(data['topik_negatif'], "Negatif")
 
 def analyze_sentiment_data(df, sentiment_name, color):
@@ -479,32 +479,32 @@ def analyze_sentiment_data(df, sentiment_name, color):
         return
     
     # Tabs for different analyses
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["📊 Distribusi", "☁️ Word Cloud", "📝 Bigram", "📝 Trigram", "📝 Fourgram"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Distribusi", "Word Cloud", "Bigram", "Trigram", "Fourgram"])
     
     with tab1:
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("📈 Distribusi Jumlah Kata")
+            st.subheader("Distribusi Jumlah Kata")
             fig1 = plot_word_count_distribution_st(df, sentiment_name, color)
             if fig1:
                 st.pyplot(fig1)
         
         with col2:
-            st.subheader("📏 Distribusi Panjang Kalimat")
+            st.subheader("Distribusi Panjang Kalimat")
             fig2 = plot_char_count_distribution_st(df, sentiment_name, color)
             if fig2:
                 st.pyplot(fig2)
         
         # Location analysis if column exists
         if 'letak' in df.columns:
-            st.subheader("🗺️ Analisis Lokasi")
+            st.subheader("Analisis Lokasi")
             fig3 = plot_top_locations_st(df, 'letak', f'Lokasi Terbanyak - {sentiment_name}', color=color)
             if fig3:
                 st.pyplot(fig3)
     
     with tab2:
-        st.subheader("☁️ Word Cloud")
+        st.subheader("Word Cloud")
         fig_wc = generate_wordcloud_st(df['komentar_clean'], f'Word Cloud - {sentiment_name}', sentiment_type=sentiment_name)
         if fig_wc:
             st.pyplot(fig_wc)
@@ -512,21 +512,21 @@ def analyze_sentiment_data(df, sentiment_name, color):
             st.warning("Tidak dapat membuat word cloud - data kosong atau tidak valid")
     
     with tab3:
-        st.subheader("📝 Analisis Bigram (2-kata)")
+        st.subheader("Analisis Bigram (2-kata)")
         fig_bi = plot_top_ngrams_st(df['komentar_clean'], f'Top Bigram - {sentiment_name}', 
                                   ngram_range=(2,2), top_n=15, color=color)
         if fig_bi:
             st.pyplot(fig_bi)
     
     with tab4:
-        st.subheader("📝 Analisis Trigram (3-kata)")
+        st.subheader("Analisis Trigram (3-kata)")
         fig_tri = plot_top_ngrams_st(df['komentar_clean'], f'Top Trigram - {sentiment_name}', 
                                    ngram_range=(3,3), top_n=15, color=color)
         if fig_tri:
             st.pyplot(fig_tri)
     
     with tab5:
-        st.subheader("📝 Analisis Fourgram (4-kata)")
+        st.subheader("Analisis Fourgram (4-kata)")
         fig_four = plot_top_ngrams_st(df['komentar_clean'], f'Top Fourgram - {sentiment_name}', 
                                     ngram_range=(4,4), top_n=15, color=color)
         if fig_four:
